@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Hvem er du som matrett?</title>
+</head>
+<style>
+    body{
+        background-color: black;
+        color: pink;
+        font-family: sans-serif;
+        text-align: center;
+        padding-top: 50px;
+    }
+</style>
+<body>
+  <div id="app"></div>
+
+  <script>
+    let navn = '';
+    let personlighet = '';
+    let rett = '';
+    let funFact = '';
+    let melding = '';
+
+
+    function updateView() {
+      document.getElementById('app').innerHTML = /*HTML*/`
+        <h2>Hvem er du som matrett?</h2>
+
+        <label for="navn">Skriv inn navnet ditt:</label><br>
+        <input id="navn" type="text" value="${navn}" onchange="settNavn(this.value)"><br><br>
+
+        <label for="personlighet">Velg personlighetstype:</label><br>
+        <select id="personlighet" onchange="settPersonlighet(this.value)">
+          <option value="">-- Velg --</option>
+          <option value="kreativ">Kreativ</option>
+          <option value="analytisk">Analytisk</option>
+          <option value="energisk">Energisk</option>
+          <option value="rolig">Rolig</option>
+        </select><br><br>
+
+        <button onclick="finnRett()">Hvem er jeg?</button>
+
+        <div style="margin-top:20px;">
+          <h3>${rett}</h3>
+          <p>${funFact}</p>
+          <p><b>${melding}</b></p>
+        </div>
+      `;
+    }
+
+    function settNavn(input) {
+      navn = input;
+    }
+
+    function settPersonlighet(input) {
+      personlighet = input;
+    }
+
+    function finnRett() {
+      if (personlighet === 'kreativ') {
+        rett = 'Sushi 🍣';
+        funFact = 'Visste du at sushi opprinnelig ble laget for å bevare fisk i gjæret ris?';
+      } else if (personlighet === 'analytisk') {
+        rett = 'Lasagne 🍝';
+        funFact = 'Lasagne består av mange lag – akkurat som du liker å analysere ting lag for lag!';
+      } else if (personlighet === 'energisk') {
+        rett = 'Pizza 🍕';
+        funFact = 'Pizza er en av verdens mest spiste retter – full av energi og alltid i sentrum.';
+      } else if (personlighet === 'rolig') {
+        rett = 'Ramen 🍜';
+        funFact = 'Ramen ble superpopulært i Japan etter 2. verdenskrig som comfort food.';
+      } else {
+        rett = '???';
+        funFact = 'Velg en personlighetstype for å få svaret.';
+      }
+
+      // personlig melding
+      melding = `${navn}, du er som ${rett}!`;
+
+      updateView();
+    }
+
+    updateView();
+
+    //Lagre informasjon i variabler
+//Bruke if/else for å bestemme hvilken matrett som passer hvor
+//fun fact om retten som også kommer med i personlig melding
+//legge til if/else for å få feilmelding hvis ingen navn? 
+  </script>
+</body>
+</html>
+
